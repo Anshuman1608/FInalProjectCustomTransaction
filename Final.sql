@@ -22,6 +22,7 @@ foreign key (merchantid) references merchant(merchantid)
 );
 
 create table transactionproduct(
+tpid int primary key auto_increment,
 transactionid int,
 custid int,
 custname varchar(30),
@@ -33,6 +34,7 @@ foreign key (transactionid) references transactions(transactionid));
 
 
 create table merchantpreferences(
+preferid int primary key auto_increment,
 merchantid int,
 upperlimit bigint,
 lowerlimit bigint,
