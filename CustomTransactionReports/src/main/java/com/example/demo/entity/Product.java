@@ -25,18 +25,6 @@ public class Product {
 	@Column(name = "category")
 	private String category;
 
-	
-	public Product() {
-		
-	}
-	
-	public Product(Integer productId, String productName, Integer productCost, String category) {
-		super();
-		this.productId = productId;
-		this.productName = productName;
-		this.productCost = productCost;
-		this.category = category;
-	}
 
 	public Integer getProductId() {
 		return productId;
@@ -69,7 +57,19 @@ public class Product {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	
-	
+
+	public Product(Integer productId, String productName, Integer productCost, String category) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productCost = productCost;
+		this.category = category;
+	}
+
+	public Product() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	
 }

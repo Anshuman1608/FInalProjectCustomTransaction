@@ -1,14 +1,13 @@
 package com.example.demo.entity;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -38,13 +37,13 @@ public class TransactionProduct {
 	@Column(name = "totalamount")
 	private double totalAmount;
 	
-	@JoinColumn(name = "transactionid", insertable = false, updatable = false, nullable = false)
-    @ManyToOne(targetEntity = AllTransactions.class, fetch = FetchType.EAGER)
-	private AllTransactions transacts;
+	@ManyToOne
+	@JoinColumn(name = "transactionid" ,insertable = false, updatable = false)
+	private AllTransactions allTransactions;
 	
-	public TransactionProduct() {
-		
-	}
+	@OneToOne
+	@JoinColumn(name = "productid" ,insertable = false, updatable = false )
+	private Product product;
 
 	public Integer getTransactionId() {
 		return transactionId;
@@ -94,16 +93,27 @@ public class TransactionProduct {
 		this.totalAmount = totalAmount;
 	}
 
-	public AllTransactions getTransacts() {
-		return transacts;
+	public AllTransactions getAllTransactions() {
+		return allTransactions;
 	}
 
-	public void setTransacts(AllTransactions transacts) {
-		this.transacts = transacts;
+	public void setAllTransactions(AllTransactions allTransactions) {
+		this.allTransactions = allTransactions;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public TransactionProduct() {
 	}
 
 	public TransactionProduct(Integer transactionId, Integer custId, String custName, Integer productId,
-			Integer quantity, double totalAmount, AllTransactions transacts) {
+			Integer quantity, double totalAmount, AllTransactions allTransactions, Product product) {
 		super();
 		this.transactionId = transactionId;
 		this.custId = custId;
@@ -111,9 +121,12 @@ public class TransactionProduct {
 		this.productId = productId;
 		this.quantity = quantity;
 		this.totalAmount = totalAmount;
-		this.transacts = transacts;
+		this.allTransactions = allTransactions;
+		this.product = product;
 	}
 	
 	
-		
+	
+	
+	
 }

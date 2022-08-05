@@ -1,42 +1,29 @@
 package com.example.demo.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "merchant")
 public class Merchant {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "merchantid")
 	private Integer merchantId;
-	
+
 	@Column(name = "merchantname")
 	private String merchantName;
-	
+
 	@Column(name = "email")
 	private String email;
-	
+
 	@Column(name = "password")
 	private String password;
-	
-	@OneToMany(mappedBy = "merchants")
-	private Set<MerchantPreferences> merchprefer = new HashSet<>();
-	
-	public Merchant() {
-		
-	}
 
 	public Integer getMerchantId() {
 		return merchantId;
@@ -70,24 +57,17 @@ public class Merchant {
 		this.password = password;
 	}
 
-	public Set<MerchantPreferences> getMerchprefer() {
-		return merchprefer;
+	public Merchant() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setMerchprefer(Set<MerchantPreferences> merchprefer) {
-		this.merchprefer = merchprefer;
-	}
-
-	public Merchant(Integer merchantId, String merchantName, String email, String password,
-			Set<MerchantPreferences> merchprefer) {
+	public Merchant(Integer merchantId, String merchantName, String email, String password) {
 		super();
 		this.merchantId = merchantId;
 		this.merchantName = merchantName;
 		this.email = email;
 		this.password = password;
-		this.merchprefer = merchprefer;
 	}
 
-
-	
 }

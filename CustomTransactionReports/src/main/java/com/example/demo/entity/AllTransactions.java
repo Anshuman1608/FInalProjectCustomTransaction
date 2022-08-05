@@ -1,14 +1,13 @@
 package com.example.demo.entity;
 
-
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -33,11 +32,22 @@ public class AllTransactions {
 	@Column(name = "pincode")
 	private long pinCode;
 	
-	@OneToMany(mappedBy = "transacts")
-	private Set<TransactionProduct> transproduct = new HashSet<>();
-	
+	@OneToMany
+	@JoinColumn(name = "transactionid")
+	private List<TransactionProduct> transactionProduct;
+
 	public AllTransactions() {
-		
+	}
+
+	public AllTransactions(Integer transactionId, Integer merchantId, String billingAddress, String timeStamp,
+			long pinCode, List<TransactionProduct> transactionProduct) {
+		super();
+		this.transactionId = transactionId;
+		this.merchantId = merchantId;
+		this.billingAddress = billingAddress;
+		this.timeStamp = timeStamp;
+		this.pinCode = pinCode;
+		this.transactionProduct = transactionProduct;
 	}
 
 	public Integer getTransactionId() {
@@ -80,25 +90,14 @@ public class AllTransactions {
 		this.pinCode = pinCode;
 	}
 
-	public Set<TransactionProduct> getTransproduct() {
-		return transproduct;
+	public List<TransactionProduct> getTransactionProduct() {
+		return transactionProduct;
 	}
 
-	public void setTransproduct(Set<TransactionProduct> transproduct) {
-		this.transproduct = transproduct;
+	public void setTransactionProduct(List<TransactionProduct> transactionProduct) {
+		this.transactionProduct = transactionProduct;
 	}
-
-	public AllTransactions(Integer transactionId, Integer merchantId, String billingAddress, String timeStamp,
-			long pinCode, Set<TransactionProduct> transproduct) {
-		super();
-		this.transactionId = transactionId;
-		this.merchantId = merchantId;
-		this.billingAddress = billingAddress;
-		this.timeStamp = timeStamp;
-		this.pinCode = pinCode;
-		this.transproduct = transproduct;
-	}
-
+	
 	
 	
 }

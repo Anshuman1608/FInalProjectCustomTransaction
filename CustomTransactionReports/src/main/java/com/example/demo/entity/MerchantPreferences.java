@@ -1,14 +1,10 @@
 package com.example.demo.entity;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,23 +20,23 @@ public class MerchantPreferences {
 	private Integer merchantId;
 	
 	@Column(name = "upperlimit")
-	private double upperLimit;
+	private Integer upperLimit;
 	
 	@Column(name = "lowerlimit")
-	private double lowerLimit;
+	private Integer lowerLimit;
 	
 	@Column(name = "pincode")
-	private long pinCode;
+	private Long pinCode;
 	
 	@Column(name = "custname")
 	private String custName;
 
-	@JoinColumn(name = "merchantid", insertable = false, updatable = false, nullable = false)
-    @ManyToOne(targetEntity = Merchant.class, fetch = FetchType.EAGER)
-	private Merchant merchants;
-	
-	public MerchantPreferences() {
-		
+	public Integer getPreferId() {
+		return preferId;
+	}
+
+	public void setPreferId(Integer preferId) {
+		this.preferId = preferId;
 	}
 
 	public Integer getMerchantId() {
@@ -51,27 +47,27 @@ public class MerchantPreferences {
 		this.merchantId = merchantId;
 	}
 
-	public double getUpperLimit() {
+	public Integer getUpperLimit() {
 		return upperLimit;
 	}
 
-	public void setUpperLimit(double upperLimit) {
+	public void setUpperLimit(Integer upperLimit) {
 		this.upperLimit = upperLimit;
 	}
 
-	public double getLowerLimit() {
+	public Integer getLowerLimit() {
 		return lowerLimit;
 	}
 
-	public void setLowerLimit(double lowerLimit) {
+	public void setLowerLimit(Integer lowerLimit) {
 		this.lowerLimit = lowerLimit;
 	}
 
-	public long getPinCode() {
+	public Long getPinCode() {
 		return pinCode;
 	}
 
-	public void setPinCode(long pinCode) {
+	public void setPinCode(Long pinCode) {
 		this.pinCode = pinCode;
 	}
 
@@ -83,23 +79,26 @@ public class MerchantPreferences {
 		this.custName = custName;
 	}
 
-	public Merchant getMerchant() {
-		return merchants;
-	}
 
-	public void setMerchant(Merchant merchants) {
-		this.merchants = merchants;
-	}
-
-	public MerchantPreferences(Integer merchantId, double upperLimit, double lowerLimit, long pinCode, String custName,
-			Merchant merchants) {
+	public MerchantPreferences(Integer preferId, Integer merchantId, Integer upperLimit, Integer lowerLimit,
+			Long pinCode, String custName) {
 		super();
+		this.preferId = preferId;
 		this.merchantId = merchantId;
 		this.upperLimit = upperLimit;
 		this.lowerLimit = lowerLimit;
 		this.pinCode = pinCode;
 		this.custName = custName;
-		this.merchants = merchants;
 	}
+
+	public MerchantPreferences() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	
+	
+	
 	
 }
