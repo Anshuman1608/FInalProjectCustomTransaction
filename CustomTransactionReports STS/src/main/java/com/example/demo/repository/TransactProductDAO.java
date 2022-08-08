@@ -17,8 +17,9 @@ import com.example.demo.entity.TransactionProduct;
 public interface TransactProductDAO extends JpaRepository<TransactionProduct, Integer> {
 
 	List<TransactionProduct> findByProductProductId(@RequestParam("productId") Integer productId);
-//	@Query(value = "select productid from transactionproduct where transactionid = :transactionId" ,nativeQuery = true)
-//	List<String> findbyTransactionid(@RequestParam("transactionId")Integer transactionId);
+	
+	@Query(value = "select t.tpid, t.transactionid,t.productid, sum(t.quantity) as quantity from transactionproduct t group by t.productid ;" , nativeQuery = true)
+	List<TransactionProduct> productvolumereport();
 
 
 	

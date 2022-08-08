@@ -40,12 +40,18 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("merchantId",merchantid.toString())
       localStorage.setItem("loggedIn", 'true')
       this.listofMerchantPreferences(merchantid)
-      this.route.navigateByUrl("/transact");
+      flag = true;
         break;
       }
       else {
         flag = false;
       }
+    }
+    if(flag === true){
+      this.route.navigateByUrl("/transact")
+    }
+    else{
+      alert("Invalid Credentials");
     }
   }
   listofMerchantPreferences(merchantId){

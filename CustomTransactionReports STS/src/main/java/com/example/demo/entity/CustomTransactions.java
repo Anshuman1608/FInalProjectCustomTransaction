@@ -34,8 +34,8 @@ public class CustomTransactions {
 	private long pincode;
 	@Column(name = "totalamount")
 	private double totalAmount;
-	@OneToMany
-	@JoinColumn(name = "transactionid")
+	
+	@OneToMany(mappedBy = "customTransaction")
 	private List<TransactionProduct> transactionProduct;
 
 	public CustomTransactions() {

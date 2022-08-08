@@ -15,6 +15,10 @@ import { Product } from 'src/app/common/product';
 export class TransactionsComponent implements OnInit {
   prefers : Merchantprefer[]
   products : Product[]
+  searchPinCode : number
+  searchName : string
+  searchLowerLimit : number
+  searchUpperLimit : number
   merchantId = parseInt(localStorage.getItem("merchantId"))
   transactions : CustomTransactions[]
   constructor(private service : ManagementService, private activeRoute : ActivatedRoute, private route : Router) { }
@@ -30,8 +34,7 @@ export class TransactionsComponent implements OnInit {
     this.service.getAllTransactions().subscribe(data => {
       console.log(data)
       this.transactions = data
-      console.log(this.transactions[0].transactionId)
-      localStorage.setItem("transactionId",this.transactions[0].transactionId.toString())
+  //   localStorage.setItem("transactionId",this.transactions[0].transactionId.toString())
     })
   }
   // listofProducts(){
@@ -41,6 +44,30 @@ export class TransactionsComponent implements OnInit {
   //     localStorage.setItem("transactionId",this.transactions[0].transactionId.toString())
   //   })
   // }
+
+  getTransactionByName()
+    {
+      this.service.getByCustName(this.searchName).subscribe(data =>{
+        console.log(data)
+        this.transactions = data
+      })
+    }
+  getTransactionByUpperLimit()
+  {
+    this.service.getByUpperLimit(this.searchUpperLimit).subscribe(data => {
+      this.transactions = data
+    })
+  }
+  getTransactionByLowerLimit(){
+    this.service.getByLowerLimit(this.searchLowerLimit).subscribe(data => {
+      this.transactions = data
+    })
+  }
+  getTransactionByPincode(){
+    this.service.getByPinCode(this.searchPinCode).subscribe(data => {
+      this.transactions = data
+    })
+  }
 
   logoutSession(){
     this.service.setUserLoggedOut()
@@ -53,8 +80,15 @@ export class TransactionsComponent implements OnInit {
    this.route.navigateByUrl("/updateFilter/"+merchantId)
   }
 
+  gotoProductVolume(){
+    this.route.navigateByUrl("/productvolume")
+  }
 
   gotoCompleteReport(){
     this.route.navigateByUrl("/completereport")
+  }
+  gotoCustomerValueReport()
+  {
+    this.route.navigateByUrl("/customervaluereport")
   }
 }

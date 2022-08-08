@@ -12,12 +12,16 @@ import { TransactionsComponent } from './components/transactions/transactions.co
 import { AuthGuard } from './guard/auth.guard';
 import { UpdatefiltersComponent } from './components/updatefilters/updatefilters.component';
 import { CompletereportComponent } from './components/completereport/completereport.component';
+import { ProductvolumereportComponent } from './components/productvolumereport/productvolumereport.component';
+import { CustomervaluereportComponent } from './components/customervaluereport/customervaluereport.component';
 
 const route : Routes = [{ path : "" , component : WelcomeComponent},
 { path : "login" , component : LoginComponent},
 { path : "transact" ,canActivate: [AuthGuard], component : TransactionsComponent},
 {path : "updateFilter" ,canActivate: [AuthGuard], component : UpdatefiltersComponent},
 {path : "completereport" ,canActivate: [AuthGuard], component : CompletereportComponent},
+{path : "productvolume" ,canActivate: [AuthGuard], component : ProductvolumereportComponent},
+{path : "customervaluereport" ,canActivate: [AuthGuard], component : CustomervaluereportComponent},
 {path : "updateFilter/:merchantid" ,canActivate: [AuthGuard], component : UpdatefiltersComponent}]
 
 @NgModule({
@@ -27,7 +31,9 @@ const route : Routes = [{ path : "" , component : WelcomeComponent},
     WelcomeComponent,
     TransactionsComponent,
     UpdatefiltersComponent,
-    CompletereportComponent
+    CompletereportComponent,
+    ProductvolumereportComponent,
+    CustomervaluereportComponent
   ],
   imports: [
     BrowserModule,

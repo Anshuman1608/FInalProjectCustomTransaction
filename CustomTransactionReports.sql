@@ -14,17 +14,6 @@ productname varchar(30),
 productcost decimal(13,2),
 category varchar(30));
 
-
-create table merchantpreferences(
-preferid int primary key auto_increment,
-merchantid int,
-pincode bigint,
-upperlimit int default 0,
-lowerlimit int default 0,
-custname varchar(50),
-foreign key (merchantid) references merchant(merchantid));
-
-
 create table customtransactions(
 transactionid int primary key auto_increment,
 custid int,

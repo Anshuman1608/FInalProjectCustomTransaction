@@ -20,7 +20,7 @@ export class ManagementService {
   pincode = parseInt(localStorage.getItem("pincode"))
   custname = localStorage.getItem("custname")
   transactionId = parseInt(localStorage.getItem("transactionId"))
-  filterurl = "http://localhost:8080/api/transact/search/findByPreferences?merchantId="+this.merchantId+"&pinCode="+this.pincode+"&custName="+this.custname+"&upperlimit="+this.upper+"&lowerlimit="+this.lower
+  transactionurl = "http://localhost:8080/api/transact/search/findBymerchantId?merchantId="+this.merchantId
   merchanturl = "http://localhost:8080/api/merchant";
   transacturl = "http://localhost:8080/api/transact/search/findBymerchantId?merchantId=";
   preferurl = "http://localhost:8080/api/merchprefer/search/findBymerchantId?id=";
@@ -46,7 +46,7 @@ export class ManagementService {
     return this.httpclient.get<getMerchantResponse>(this.merchanturl).pipe(map(response => response._embedded.merchants));
   }
   getAllTransactions() : Observable<CustomTransactions[]>{
-    return this.httpclient.get<getTransactionResponse>(this.filterurl).pipe(map(response => response._embedded.customTransactionses));
+    return this.httpclient.get<getTransactionResponse>(this.transactionurl).pipe(map(response => response._embedded.customTransactionses));
   }
   getAllPreferences(merchantId) : Observable<Merchantprefer[]>{
     return this.httpclient.get<getMerchantPreferenceResponse>(this.preferurl+merchantId).pipe(map(response => response._embedded.merchantPreferenceses));
@@ -63,6 +63,26 @@ export class ManagementService {
   {
     const completeReportUrl = "http://localhost:8080/api/transact/search/getByTimestamps?t1="+t1+"&t2="+t2;
     return this.httpclient.get<getTransactionResponse>(completeReportUrl).pipe(map(response => response._embedded.customTransactionses));
+  }
+
+  getByCustName(custName : string) : Observable<CustomTransactions[]>{
+    const transactByNameUrl = "http://localhost:8080/api/transact/search/findByCustNameContainsIgnoreCase?name="+ custName
+    return this.httpclient.get<getTransactionResponse>(transactByNameUrl).pipe(map(response=> response._embedded.customTransactionses));
+  }
+
+  getByUpperLimit(upperLimit : number) : Observable<CustomTransactions[]>{
+    const transactByUpperLimitUrl = "http://localhost:8080/api/transact/search/findBytotalAmountLessThan?upperLimit="+upperLimit
+    return this.httpclient.get<getTransactionResponse>(transactByUpperLimitUrl).pipe(map(response=> response._embedded.customTransactionses));
+  }
+
+  getByLowerLimit(lowerLimit : number) : Observable<CustomTransactions[]>{
+    const transactByLowerLimitUrl = "http://localhost:8080/api/transact/search/findBytotalAmountGreaterThan?lowerLimit="+lowerLimit
+    return this.httpclient.get<getTransactionResponse>(transactByLowerLimitUrl).pipe(map(response=> response._embedded.customTransactionses));
+  }
+
+  getByPinCode(pinCode : number) : Observable<CustomTransactions[]>{
+    const transactByPinCodeUrl = "http://localhost:8080/api/transact/search/findByPincode?pincode="+pinCode
+    return this.httpclient.get<getTransactionResponse>(transactByPinCodeUrl).pipe(map(response=> response._embedded.customTransactionses));
   }
 
   updatePreference(prefers : Merchantprefer)
@@ -95,6 +115,17 @@ export class ManagementService {
     };
     return this.httpclient.post<Merchantprefer>(this.preferenceurl,prefers,httpOptions)
   }
+
+  getAllcustomerreport(t1 : string , t2 : string): Observable<CustomTransactions[]>
+  {
+    const completeReportUrl = "http://localhost:8080/api/transact/search/findcustomervaluereport?t1="+t1+"&t2="+t2;
+    return this.httpclient.get<getTransactionResponse>(completeReportUrl).pipe(map(response => response._embedded.customTransactionses));
+  }
+
+  getQuantity():Observable<TransactionProduct[]>{
+    const quantityUrl = "http://localhost:8080/api/transactioncart/search/productvolumereport"
+    return this.httpclient.get<getTransactionProductResponse>(quantityUrl).pipe(map(response => response._embedded.transactionProducts));
+  }
 }
 
 interface getMerchantResponse{
@@ -116,5 +147,11 @@ interface getMerchantPreferenceResponse{
 interface getProductResponse{
   _embedded : {
     products : Product[]
+  }
+}
+
+interface getTransactionProductResponse{
+  _embedded : {
+    transactionProducts : TransactionProduct[]
   }
 }

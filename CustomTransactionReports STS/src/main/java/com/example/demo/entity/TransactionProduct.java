@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,9 +26,8 @@ public class TransactionProduct {
 	
 	@Column(name = "productid")
 	private Integer productId;
-	
-	@ManyToOne
 	@JoinColumn(name = "transactionid" , insertable = false, updatable = false)
+	@ManyToOne(targetEntity = CustomTransactions.class, fetch = FetchType.EAGER)	
 	private CustomTransactions customTransaction;
 	@OneToOne
 	@JoinColumn(name = "productid", insertable = false, updatable = false)

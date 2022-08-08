@@ -4,24 +4,28 @@ import { Router } from '@angular/router';
 import { CustomTransactions } from 'src/app/common/custom-transactions';
 
 @Component({
-  selector: 'app-completereport',
-  templateUrl: './completereport.component.html',
-  styleUrls: ['./completereport.component.css']
+  selector: 'app-customervaluereport',
+  templateUrl: './customervaluereport.component.html',
+  styleUrls: ['./customervaluereport.component.css']
 })
-export class CompletereportComponent implements OnInit {
-  transactions: CustomTransactions[]
+export class CustomervaluereportComponent implements OnInit {
+
+  transactions : CustomTransactions[]
   constructor(private service : ManagementService, private route : Router) { }
 
   ngOnInit(): void {
   }
 
-
-  completeReport(completeform: any){
-    this.service.getAlltransactionstilldate(completeform.startdate, completeform.enddate).subscribe(data => {
+  customerValueReport(completeform: any){
+    this.service.getAllcustomerreport(completeform.startdate, completeform.enddate).subscribe(data => {
       console.log(data)
      this.transactions = data
     })
 
+  }
+
+  gotoProductVolume(){
+    this.route.navigateByUrl("/productvolume")
   }
 
   gotoTransactionReport(){
@@ -38,5 +42,4 @@ export class CompletereportComponent implements OnInit {
     sessionStorage.clear()
     this.route.navigateByUrl("/")
   }
-
 }

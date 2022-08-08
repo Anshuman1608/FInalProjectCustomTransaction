@@ -16,15 +16,6 @@ export class UpdatefiltersComponent implements OnInit {
   ngOnInit(): void {
     this.activateRoute.paramMap.subscribe(()=>this.getPreferenceByMerchId())
   }
-  onSubmit(): void{
-    if(this.editable){
-      this.service.updatePreference(this.prefers).subscribe(() =>
-      this.route.navigateByUrl("/transact"))
-    }
-    else{this.service.savePreference(this.prefers).subscribe(() =>{
-      this.route.navigateByUrl("/transact")
-    })}
-  }
   getPreferenceByMerchId (){
     const merchantId = +this.activateRoute.snapshot.paramMap.get("merchantid");
     console.log(merchantId)
@@ -37,6 +28,16 @@ export class UpdatefiltersComponent implements OnInit {
       }))
     }
   }
+  onSubmit(): void{
+    if(this.editable){
+      this.service.updatePreference(this.prefers).subscribe(() =>
+      this.route.navigateByUrl("/transact"))
+    }
+    else{this.service.savePreference(this.prefers).subscribe(() =>{
+      this.route.navigateByUrl("/transact")
+    })}
+  }
+
   gotoCompleteReport(){
     this.route.navigateByUrl("/completereport")
   }
