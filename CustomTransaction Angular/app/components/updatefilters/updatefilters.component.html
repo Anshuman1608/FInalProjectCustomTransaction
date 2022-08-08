@@ -1,0 +1,186 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+	<style>
+	* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #fbf3ff;
+}
+
+.container {
+    position: absolute;
+    max-width: 800px;
+    height: 500px;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.myLeftCtn {
+    position: relative;
+    background: #fff;
+    border-radius: 25px;
+    height: 100%;
+    padding: 25px;
+    padding-left: 50px;
+}
+
+.myLeftCtn header {
+    color: blueviolet;
+    font-size: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.row {
+    height: 100%;
+}
+
+.myCard {
+    position: relative;
+    background: #fff;
+    height: 100%;
+    border-radius: 25px;
+    -webkit-box-shadow: 0px 10px 40px -10px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 0px 10px 40px -10px rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 10px 40px -10px rgba(0, 0, 0, 0.7);
+}
+
+
+.box {
+    position: relative;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 20px;
+    margin-bottom: 100px;
+}
+
+.myLeftCtn .myInput {
+    width: 230px;
+    border-radius: 3px;
+    padding: 10px;
+    padding-left: 50px;
+    border: none;
+    -webkit-box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+    margin-bottom: 10px;
+}
+
+.myLeftCtn .myInput:focus {
+    outline: none;
+}
+
+.myForm {
+    position: relative;
+    margin-top: 50px;
+}
+
+.myLeftCtn .butt {
+    background: linear-gradient(45deg, #bb36fd, #9b00e8);
+    color: #fff;
+    width: 230px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    -webkit-box-shadow: 0px 10px 41px -11px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 0px 10px 41px -11px rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 10px 41px -11px rgba(0, 0, 0, 0.7);
+}
+
+.myLeftCtn .butt:hover {
+    background: linear-gradient(45deg, #c85bff, #b726ff);
+}
+
+.myLeftCtn .butt:focus {
+    outline: none;
+}
+
+.myLeftCtn{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    position: relative;
+    color: #0a030d;
+    left: 36px;
+}
+.myInput{
+    margin-left: 80px;
+}
+
+.butt {
+    border-radius: 5px;
+    margin: 10px;
+}
+#pin{
+    margin-left: 165px;
+}
+#cName{
+    margin-left: 113px;
+}
+
+	</style>
+</head>
+
+<body>
+    <ul class="nav justify-content-center bg-dark">
+      <li class="nav-item">
+        <a class="nav-link active" (click) = "gotoHome()">Home</a>
+      </li>
+        <li class="nav-item">
+            <a class="nav-link active" (click) = "gotoCompleteReport()">Complete Report</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" (click) ="logoutSession()">Logout</a>
+        </li>
+    </ul>
+
+    <div class="container">
+        <div class="myCard">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="myLeftCtn">
+                        <form class="myForm text-center" (ngSubmit) = "onSubmit()">
+                            <header><strong>Update Filters</strong></header>
+
+                            <div class="form-group">
+                                <label for="upLimit">Upper Limit Amount</label>
+                                <input class="myInput shadow" type="text" name="upperLimit" id="upLimit" pattern="[0-9]+" [(ngModel)] = "prefers.upperLimit">
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lowLimit">Lower Limit Amount</label>
+                                <input class="myInput shadow" type="text" name="lower limit" id="lowLimit" pattern="[0-9]+" [(ngModel)] = "prefers.lowerLimit">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pin">Pincode</label>
+                                <input class="myInput shadow" type="text" name="pincode" id="pin" pattern="[0-9]{6}" [(ngModel)] = "prefers.pincode">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cName">Cutomer Name</label>
+                                <input class="myInput shadow" type="text" name="Cust Name" id="cName" pattern="[a-zA-Z]{0,40}" [(ngModel)] = "prefers.custName">
+                            </div>
+                            <a href="./Transactions1.html"><input type="submit" class="butt" value="Apply"
+                                    target="_blank"></a>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
